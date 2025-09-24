@@ -8,6 +8,7 @@
         <class>riccardogulin.entities.User</class>
         <class>riccardogulin.entities.Document</class>
         <class>riccardogulin.entities.Blog</class>
+        <class>riccardogulin.entities.Category</class>
         <properties>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/u4d13"/>
             <!-- Dopo l'ultimo slash devo inserire il nome del database (QUESTO DEVE ESISTERE PERO') -->

@@ -2,6 +2,7 @@ package riccardogulin.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -18,6 +19,15 @@ public class Blog {
 	@JoinColumn(name = "user_id", nullable = false)
 	private User author;
 
+	@ManyToMany
+	@JoinTable(name = "blogs_categories",
+			joinColumns = @JoinColumn(name = "blog_id", nullable = false),
+			inverseJoinColumns = @JoinColumn(name = "category_id", nullable = false)
+	)
+	// @JoinTable non è obbligatoria ma molto consigliata in quanto se lascio fare a JPA, può creare
+	// pasticci. Invece quest'annotazione mi consente di definire a me la struttura della JUNCTION TABLE
+	private List<Category> categories;
+
 	public Blog() {
 	}
 
@@ -25,6 +35,14 @@ public class Blog {
 		this.title = title;
 		this.content = content;
 		this.author = author;
+	}
+
+	public List<Category> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(List<Category> categories) {
+		this.categories = categories;
 	}
 
 	public UUID getBlogId() {
@@ -59,7 +77,8 @@ public class Blog {
 				"blogId=" + blogId +
 				", title='" + title + '\'' +
 				", content='" + content + '\'' +
-				", author=" + author +
+				", author=" + author + '\'' +
+				", categories='" + categories +
 				'}';
 	}
 }
