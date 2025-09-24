@@ -64,7 +64,7 @@ public class User {
 				"userId=" + userId +
 				", name='" + name + '\'' +
 				", surname='" + surname + '\'' +
-				", document=" + document +
+				//", document=" + document +
 				'}';
 	}
 }

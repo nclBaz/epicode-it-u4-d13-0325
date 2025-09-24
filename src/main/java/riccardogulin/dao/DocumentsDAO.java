@@ -3,6 +3,7 @@ package riccardogulin.dao;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import riccardogulin.entities.Document;
+import riccardogulin.exceptions.NotFoundException;
 
 import java.util.UUID;
 
@@ -18,12 +19,12 @@ public class DocumentsDAO {
 		transaction.begin();
 		entityManager.persist(newDocument);
 		transaction.commit();
-		System.out.println("Il documento" + newDocument.getDocumentId() + " è stato creato!");
+		System.out.println("Il documento " + newDocument.getDocumentId() + " è stato creato!");
 	}
 
 	public Document findById(String documentId) {
 		Document found = entityManager.find(Document.class, UUID.fromString(documentId));
-		if (found == null) throw new RuntimeException();
+		if (found == null) throw new NotFoundException(documentId);
 		return found;
 	}
 }

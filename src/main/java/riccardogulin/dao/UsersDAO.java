@@ -3,6 +3,7 @@ package riccardogulin.dao;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import riccardogulin.entities.User;
+import riccardogulin.exceptions.NotFoundException;
 
 import java.util.UUID;
 
@@ -23,7 +24,7 @@ public class UsersDAO {
 
 	public User findById(String userId) {
 		User found = entityManager.find(User.class, UUID.fromString(userId));
-		if (found == null) throw new RuntimeException();
+		if (found == null) throw new NotFoundException(userId);
 		return found;
 	}
 }
